@@ -1,7 +1,6 @@
 package com.example.laboratory_work;
 
-import com.example.laboratory_work.counter.RequestCounter;
-import com.example.laboratory_work.counter.RestCounterThread;
+import com.example.laboratory_work.counter.RequestCounterThread;
 import com.example.laboratory_work.exception.DataRequestException;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +13,7 @@ public class Controller {
     @GetMapping("/Data")
     public String get(@RequestParam(value = "words") String words,
                       @RequestParam(value = "symbol") char symbols)throws DataRequestException{
-        RestCounterThread counterThread = new RestCounterThread();
+        RequestCounterThread counterThread = new RequestCounterThread();
            DataClass gr = new DataClass(words,symbols);
            return String.format(template,gr.getWords(),cl.calc(gr),gr.getSymbol());
     }

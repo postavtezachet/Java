@@ -1,10 +1,12 @@
 package com.example.laboratory_work.counter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-public class RestCounterThread extends Thread{
-    Logger logger = LoggerFactory.getLogger(RestCounterThread.class);
+
+public class RequestCounterThread extends Thread{
+    Logger logger = LoggerFactory.getLogger(RequestCounterThread.class);
     RequestCounter counter = new RequestCounter();
-    public RestCounterThread(){
+    public RequestCounterThread(){
         super();
         start();
     }

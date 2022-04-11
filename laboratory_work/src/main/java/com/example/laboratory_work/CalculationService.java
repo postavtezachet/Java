@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CalculationService {
     private Logger logger = LoggerFactory.getLogger(CalculationService.class);
-    @Autowired
-    private static CalculationCache hashMap = new CalculationCache();
+    //@Autowired
+    private CalculationCache hashMap = new CalculationCache();
     public int calc(DataClass gr) {
         int count = 0;
         if(hashMap.isContain(gr)){

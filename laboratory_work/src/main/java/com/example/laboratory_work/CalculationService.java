@@ -7,9 +7,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CalculationService {
+    private CalculationCache hashMap;
     private Logger logger = LoggerFactory.getLogger(CalculationService.class);
-    //@Autowired
-    private CalculationCache hashMap = new CalculationCache();
+    @Autowired
+    public void setHashMap(CalculationCache hashMap){
+        this.hashMap = hashMap;
+    }
     public int calc(DataClass gr) {
         int count = 0;
         if(hashMap.isContain(gr)){

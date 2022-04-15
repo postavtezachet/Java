@@ -2,20 +2,27 @@ package com.example.laboratory_work;
 
 import com.example.laboratory_work.counter.RequestCounterThread;
 import com.example.laboratory_work.exception.DataRequestException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 public class Controller {
-    //autowired
-    private CalculationService cl = new CalculationService();
+    private CalculationService states;
+    private RequestCounterThread counterThread;
+
+    @Autowired
+    public void setter(CalculationService newService){
+        this.states = newService;
+    }
+
     private static final String template = "The words \" %s \" have %d symbols \"%c\"";
     @GetMapping("/Data")
     public String get(@RequestParam(value = "words") String words,
                       @RequestParam(value = "symbol") char symbols)throws DataRequestException{
-        RequestCounterThread counterThread = new RequestCounterThread();
+           counterThread = new RequestCounterThread();
            DataClass gr = new DataClass(words,symbols);
-           return String.format(template,gr.getWords(),cl.calc(gr),gr.getSymbol());
+           return String.format(template,gr.getWords(),states.calc(gr),gr.getSymbol());
     }
 
 

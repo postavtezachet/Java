@@ -5,6 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Component
 public class CalculationService {
     private CalculationCache hashMap;
@@ -30,5 +33,13 @@ public class CalculationService {
             logger.info("Add to hashMap");
         }
         return count;
+    }
+
+    public long calcSize(List<Integer> resList){
+        long size =0;
+        if(!resList.isEmpty()){
+            size = resList.stream().count();
+        }
+        return size;
     }
 }

@@ -22,7 +22,7 @@ public class Controller {
     }
 
     private static final String template = "The words \" %s \" have %d symbols \"%c\"";
-    private static final String template1 = "The words  %s have %d symbols %c ";
+    private static final String template1 = "The words %s have %d symbols %c\n";
 
     @GetMapping("/Data")
     public String get(@RequestParam(value = "words") String words,
@@ -33,11 +33,15 @@ public class Controller {
     }
     @PostMapping("/Data")
     public ResponseEntity<?> post1(@RequestBody List<DataClass> list){
-        List<String> res = new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        List<String> res_output = new ArrayList<>();
         list.forEach((element)->{
-            res.add( String.format(template1,element.getWords(),states.calc(element),element.getSymbol()));
+            res_output.add(String.format(template1,element.getWords(),states.calc(element),element.getSymbol()));
+            res.add(states.calc(element));
         });
-        return new ResponseEntity<>(res, HttpStatus.OK);
+
+        long sizeOfRequest = states.calcSize(res);
+        return new ResponseEntity<>(res_output + "\nSize = " + sizeOfRequest, HttpStatus.OK);
     }
 
 }

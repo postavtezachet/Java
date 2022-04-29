@@ -30,8 +30,4 @@ public class DataClass {
         res = 31*res + (int) Double.doubleToLongBits(symbol);
         return res;
     }
-    @Override
-    public String toString() {
-        return "The words" +words+ "have symbols" + symbol;
-    }
 }

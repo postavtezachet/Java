@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
@@ -41,5 +41,34 @@ public class CalculationService {
             size = resList.stream().count();
         }
         return size;
+    }
+    public int findMax(List<Integer> resList){
+        int max = 0;
+        if(!resList.isEmpty()){
+            max = resList.stream().mapToInt(Integer::intValue).max().getAsInt();
+        }
+        return max;
+    }
+    public int findMin(List<Integer> resList){
+        int min = 0;
+        if(!resList.isEmpty()){
+            min = resList.stream().mapToInt(Integer::intValue).min().getAsInt();
+        }
+        return min;
+    }
+    public int mostRecurring(List<Integer> resList){
+        int size = 0;
+        int max =0;
+        int numb =0;
+        HashSet<Integer> res = new HashSet<>();
+        res.addAll(resList);
+        for(int a :res) {
+           size = Collections.frequency(resList, a);
+           if(size > max){
+               max = size;
+               numb = a;
+           }
+        }
+        return numb;
     }
 }

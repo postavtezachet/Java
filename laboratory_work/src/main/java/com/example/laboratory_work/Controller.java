@@ -41,7 +41,10 @@ public class Controller {
         });
 
         long sizeOfRequest = states.calcSize(res);
-        return new ResponseEntity<>(res_output + "\nSize = " + sizeOfRequest, HttpStatus.OK);
+        long offten = states.mostRecurring(res);
+        int MAX = states.findMax(res);
+        int MIN = states.findMin(res);
+        return new ResponseEntity<>(res_output + "\nSize = " + sizeOfRequest + "\nMax = "+MAX + "\nMin = "+ MIN+"\nOfften = "+ offten, HttpStatus.OK);
     }
 
 }
